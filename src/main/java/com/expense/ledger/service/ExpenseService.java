@@ -17,27 +17,33 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class ExpenseService {
 
+     @Autowired
      private final LedgerApplication ledgerApplication;
 
+     @Autowired
      private final ExpenseConsumer expenseConsumer;
 
-     private ExpenseRepository expenseRepository;
-
-     private ObjectMapper objectMapper = new ObjectMapper();
+     @Autowired
+     private final ExpenseRepository expenseRepository;
 
      @Autowired
-     ExpenseService(ExpenseRepository expenseRepository, ExpenseConsumer expenseConsumer,
-               LedgerApplication ledgerApplication) {
-          this.expenseRepository = expenseRepository;
-          this.expenseConsumer = expenseConsumer;
-          this.ledgerApplication = ledgerApplication;
-     }
+     private final ObjectMapper objectMapper;
 
+     // @Autowired
+     // public ExpenseService(LedgerApplication ledgerApplication, ExpenseConsumer
+     // expenseConsumer, ExpenseRepository expenseRepository, ObjectMapper
+     // objectMapper) {
+     // this.ledgerApplication = ledgerApplication;
+     // this.expenseConsumer = expenseConsumer;
+     // this.expenseRepository = expenseRepository;
+     // this.objectMapper = objectMapper;
+     // }
      public boolean createExpense(ExpenseDto expenseDto) {
           setCurrency(expenseDto);
           try {
