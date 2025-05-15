@@ -3,6 +3,7 @@ package com.expense.ledger.DTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -17,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExpenseDto {
      private String externalId;
@@ -40,7 +41,7 @@ public class ExpenseDto {
      public ExpenseDto(String json) {
           try {
                ObjectMapper mapper = new ObjectMapper();
-               mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+               mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
                ExpenseDto expense = mapper.readValue(json, ExpenseDto.class);
                this.externalId = expense.externalId;
                this.amount = expense.amount;
